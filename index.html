@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GlassCalc Pro — Premium Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div
+      id="loader"
+      class="loader"
+      aria-live="polite"
+      aria-label="Loading GlassCalc Pro"
+    >
+      <div class="loader__ring"></div>
+      <p class="loader__text">GlassCalc Pro</p>
+    </div>
+
+    <div class="bg" aria-hidden="true">
+      <div class="bg__blob bg__blob--1"></div>
+      <div class="bg__blob bg__blob--2"></div>
+      <div class="bg__blob bg__blob--3"></div>
+      <canvas id="particles" class="bg__particles"></canvas>
+    </div>
+
+    <main class="app" id="app">
+      <header class="app__header">
+        <div class="app__brand">
+          <span class="app__title"
+            >GlassCalc <span class="app__title-accent">Pro</span></span
+          >
+          <span class="app__subtitle">Premium Calculator Experience</span>
+        </div>
+        <div class="app__meta">
+          <span id="datetime" class="app__datetime"></span>
+        </div>
+      </header>
+
+      <section class="calc" aria-label="Calculator">
+        <div class="calc__display" aria-live="polite">
+          <div
+            id="expression"
+            class="calc__expression"
+            aria-label="Expression"
+          ></div>
+          <div id="result" class="calc__result" aria-label="Result">0</div>
+        </div>
+
+        <div class="calc__grid" role="group" aria-label="Calculator buttons">
+          <button
+            class="btn btn--fn btn--ac"
+            data-action="clear"
+            aria-label="All clear"
+          >
+            AC
+          </button>
+          <button
+            class="btn btn--fn btn--del"
+            data-action="delete"
+            aria-label="Delete last character"
+          >
+            DEL
+          </button>
+          <button
+            class="btn btn--fn btn--pct"
+            data-action="input"
+            data-value="%"
+            aria-label="Percent"
+          >
+            %
+          </button>
+          <button
+            class="btn btn--op"
+            data-action="input"
+            data-value="÷"
+            aria-label="Divide"
+          >
+            ÷
+          </button>
+
+          <button class="btn btn--num" data-action="input" data-value="7">
+            7
+          </button>
+          <button class="btn btn--num" data-action="input" data-value="8">
+            8
+          </button>
+          <button class="btn btn--num" data-action="input" data-value="9">
+            9
+          </button>
+          <button
+            class="btn btn--op"
+            data-action="input"
+            data-value="×"
+            aria-label="Multiply"
+          >
+            ×
+          </button>
+
+          <button class="btn btn--num" data-action="input" data-value="4">
+            4
+          </button>
+          <button class="btn btn--num" data-action="input" data-value="5">
+            5
+          </button>
+          <button class="btn btn--num" data-action="input" data-value="6">
+            6
+          </button>
+          <button
+            class="btn btn--op"
+            data-action="input"
+            data-value="-"
+            aria-label="Subtract"
+          >
+            −
+          </button>
+
+          <button class="btn btn--num" data-action="input" data-value="1">
+            1
+          </button>
+          <button class="btn btn--num" data-action="input" data-value="2">
+            2
+          </button>
+          <button class="btn btn--num" data-action="input" data-value="3">
+            3
+          </button>
+          <button
+            class="btn btn--op"
+            data-action="input"
+            data-value="+"
+            aria-label="Add"
+          >
+            +
+          </button>
+
+          <button
+            class="btn btn--num btn--zero"
+            data-action="input"
+            data-value="0"
+          >
+            0
+          </button>
+          <button class="btn btn--num" data-action="input" data-value=".">
+            .
+          </button>
+          <button class="btn btn--eq" data-action="equals" aria-label="Equals">
+            =
+          </button>
+        </div>
+      </section>
+
+      <div class="history-toggle-wrap">
+        <button
+          id="historyToggle"
+          class="history-toggle"
+          aria-expanded="false"
+          aria-controls="historyPanel"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="12 8 12 12 14 14"></polyline>
+            <path d="M3.05 11a9 9 0 1 0 .5-4"></path>
+            <polyline points="3 3 3 9 9 9"></polyline>
+          </svg>
+          History
+        </button>
+      </div>
+
+      <aside
+        id="historyPanel"
+        class="history"
+        aria-label="Calculation history"
+        hidden
+      >
+        <div class="history__header">
+          <h2 class="history__title">History</h2>
+          <button
+            id="clearHistory"
+            class="history__clear"
+            aria-label="Clear all history"
+          >
+            Clear all
+          </button>
+        </div>
+        <ul
+          id="historyList"
+          class="history__list"
+          aria-label="Past calculations"
+          role="list"
+        >
+          <li class="history__empty">No calculations yet</li>
+        </ul>
+      </aside>
+
+      P
+      <footer class="app__footer">
+        Developed by <span class="app__footer-accent">Madhav</span>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
